@@ -176,10 +176,10 @@ bind = ,Print, exec, grim -g "$(slurp)" - | wl-copy
 bind = SHIFT,Print, exec, grim - | wl-copy
 
 # === WINDOW RULES ===
-windowrule = suppress_event maximize, class:.*
-windowrule = float, class:^(pavucontrol)$
-windowrule = float, class:^(nm-connection-editor)$
-windowrule = float, title:^(Picture-in-Picture)$
+windowrule = match:class .*, suppress_event maximize
+windowrule = match:class ^(pavucontrol)$, float on
+windowrule = match:class ^(nm-connection-editor)$, float on
+windowrule = match:title ^(Picture-in-Picture)$, float on
 HYPRCONF
 
 echo "✓ Hyprland config written"
