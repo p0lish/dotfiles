@@ -16,7 +16,7 @@ fi
 echo "=== Installing packages ==="
 sudo dnf copr enable -y sdegler/hyprland
 sudo dnf install -y --skip-unavailable hyprland kitty waybar wofi dunst \
-    grim slurp wl-clipboard brightnessctl playerctl \
+    grim slurp wl-clipboard brightnessctl playerctl pavucontrol \
     hyprpolkitagent xdg-desktop-portal-hyprland
 
 echo ""

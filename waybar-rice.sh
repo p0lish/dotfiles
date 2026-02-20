@@ -18,7 +18,7 @@ cat > ~/.config/waybar/config << 'WAYBARCONF'
 
     "modules-left": ["custom/logo", "hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["pulseaudio", "network", "battery", "tray", "clock"],
+    "modules-right": ["temperature", "pulseaudio", "network", "battery", "tray", "clock"],
 
     "custom/logo": {
         "format": "󰣛",
@@ -66,6 +66,13 @@ cat > ~/.config/waybar/config << 'WAYBARCONF'
         "format-icons": {"default": ["󰕿", "󰖀", "󰕾"]},
         "tooltip-format": "{volume}%",
         "on-click": "pavucontrol"
+    },
+
+    "temperature": {
+        "format": " {temperatureC}°",
+        "critical-threshold": 80,
+        "format-critical": " {temperatureC}°",
+        "tooltip-format": "{temperatureC}°C"
     }
 }
 WAYBARCONF
@@ -118,9 +125,13 @@ window#waybar {
     padding: 0 14px;
 }
 
-#battery, #network, #pulseaudio {
+#battery, #network, #pulseaudio, #temperature {
     padding: 0 10px;
     color: #888888;
+}
+
+#temperature.critical {
+    color: #cc6666;
 }
 
 #battery.charging {
