@@ -15,6 +15,8 @@ if ! command -v dnf &> /dev/null; then
 fi
 
 echo "=== Installing packages ==="
+# hyprpolkitagent via solopasha COPR (not in official repos)
+sudo dnf copr enable -y solopasha/hyprland
 sudo dnf install -y hyprland kitty waybar wofi dunst \
     nvidia-dkms libva-nvidia-driver \
     grim slurp wl-clipboard brightnessctl playerctl \
