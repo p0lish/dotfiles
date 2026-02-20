@@ -17,8 +17,8 @@ fi
 echo "=== Installing packages ==="
 # sdegler COPR - maintained fork (solopasha abandoned, Qt6.10 breaks)
 sudo dnf copr enable -y sdegler/hyprland
-sudo dnf install -y hyprland kitty waybar wofi dunst \
-    nvidia-dkms libva-nvidia-driver \
+sudo dnf install -y --skip-unavailable hyprland kitty waybar wofi dunst \
+    akmod-nvidia libva-nvidia-driver \
     grim slurp wl-clipboard brightnessctl playerctl \
     hyprpolkitagent xdg-desktop-portal-hyprland
 
