@@ -70,34 +70,43 @@ input {
 
 # === APPEARANCE ===
 general {
-    gaps_in = 5
-    gaps_out = 10
+    gaps_in = 4
+    gaps_out = 8
     border_size = 2
-    col.active_border = rgba(888888ff)
-    col.inactive_border = rgba(333333ff)
+    col.active_border = rgba(cc6666ee) rgba(666666ee) 45deg
+    col.inactive_border = rgba(1a1a1aee)
     layout = dwindle
 }
 
 decoration {
-    rounding = 8
+    rounding = 12
     blur {
         enabled = true
-        size = 5
-        passes = 2
+        size = 8
+        passes = 3
+        new_optimizations = true
+        xray = true
     }
     shadow {
         enabled = true
-        range = 10
-        render_power = 2
+        range = 20
+        render_power = 3
+        color = rgba(00000099)
     }
+    active_opacity = 0.95
+    inactive_opacity = 0.88
 }
 
 animations {
     enabled = true
-    bezier = ease, 0.25, 0.1, 0.25, 1
-    animation = windows, 1, 4, ease
-    animation = fade, 1, 4, ease
-    animation = workspaces, 1, 4, ease
+    bezier = smooth, 0.05, 0.9, 0.1, 1.05
+    bezier = fade, 0.0, 0.0, 0.2, 1.0
+    animation = windows, 1, 5, smooth, slide
+    animation = windowsOut, 1, 5, fade, popin 80%
+    animation = fade, 1, 5, fade
+    animation = workspaces, 1, 6, smooth, slidevert
+    animation = border, 1, 10, default
+    animation = borderangle, 1, 100, default, loop
 }
 
 dwindle {
@@ -219,33 +228,45 @@ WAYBARCONF
 cat > ~/.config/waybar/style.css << 'WAYBARSTYLE'
 * {
     font-family: "JetBrains Mono", "Font Awesome 6 Free", monospace;
-    font-size: 13px;
-    color: #c0c0c0;
+    font-size: 12px;
+    color: #b0b0b0;
 }
 window#waybar {
-    background: rgba(20, 20, 20, 0.9);
-    border-bottom: 1px solid #333;
+    background: rgba(10, 10, 10, 0.85);
+    border: none;
+    border-radius: 0;
 }
 #workspaces button {
-    padding: 0 8px;
+    padding: 0 10px;
+    margin: 4px 2px;
     background: transparent;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
+    color: #666;
+    transition: all 0.2s ease;
 }
 #workspaces button.active {
-    background: #444;
-    color: #fff;
+    background: rgba(204, 102, 102, 0.3);
+    color: #cc6666;
+    border-bottom: 2px solid #cc6666;
 }
 #workspaces button:hover {
-    background: #333;
+    background: rgba(255, 255, 255, 0.05);
+    color: #999;
 }
-#clock, #battery, #network, #pulseaudio, #tray {
-    padding: 0 12px;
+#clock {
+    font-weight: bold;
+    color: #cc6666;
 }
-#battery.charging { color: #8ec07c; }
-#battery.warning:not(.charging) { color: #fabd2f; }
-#battery.critical:not(.charging) { color: #fb4934; }
-#network.disconnected { color: #666; }
+#battery, #network, #pulseaudio, #tray {
+    padding: 0 14px;
+    margin: 4px 0;
+}
+#battery.charging { color: #7c9c7c; }
+#battery.warning:not(.charging) { color: #cc9966; }
+#battery.critical:not(.charging) { color: #cc6666; }
+#network.disconnected { color: #444; }
+#pulseaudio.muted { color: #444; }
 WAYBARSTYLE
 
 echo "✓ Configs written"
