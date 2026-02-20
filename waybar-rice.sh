@@ -1,5 +1,5 @@
 #!/bin/bash
-# Waybar rice config
+# Waybar rice config - clean pills style
 # curl -fsSL https://raw.githubusercontent.com/p0lish/dotfiles/master/waybar-rice.sh | bash
 
 set -e
@@ -14,11 +14,11 @@ cat > ~/.config/waybar/config << 'WAYBARCONF'
 {
     "layer": "top",
     "position": "top",
-    "height": 34,
+    "height": 32,
     "spacing": 0,
-    "modules-left": ["custom/logo", "hyprland/workspaces", "hyprland/window"],
-    "modules-center": ["clock"],
-    "modules-right": ["cpu", "memory", "pulseaudio", "network", "battery", "tray"],
+    "modules-left": ["custom/logo", "hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["pulseaudio", "network", "cpu", "temperature", "battery", "clock", "tray"],
     "custom/logo": {
         "format": "󰣛",
         "tooltip": false,
@@ -27,41 +27,39 @@ cat > ~/.config/waybar/config << 'WAYBARCONF'
     "hyprland/workspaces": {
         "format": "{icon}",
         "format-icons": {
-            "1": "一",
-            "2": "二",
-            "3": "三",
-            "4": "四",
-            "5": "五",
-            "6": "六",
-            "7": "七",
-            "8": "八",
-            "9": "九",
-            "active": "●",
-            "default": "○"
+            "1": "󰖟 Web",
+            "2": "󰅩 Code",
+            "3": "󰝚 Music",
+            "4": "󰭹 Chat",
+            "5": "󰉋 Files",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9"
         },
-        "on-click": "activate"
+        "on-click": "activate",
+        "persistent-workspaces": {
+            "*": 5
+        }
     },
     "hyprland/window": {
-        "max-length": 40,
-        "separate-outputs": true
+        "max-length": 50,
+        "separate-outputs": true,
+        "format": "{title}"
     },
     "clock": {
         "format": "{:%H:%M}",
         "format-alt": "{:%a %d %b}",
-        "tooltip-format": "<tt>{calendar}</tt>",
-        "calendar": {
-            "format": {
-                "today": "<span color='#cc6666'><b>{}</b></span>"
-            }
-        }
+        "tooltip-format": "<tt>{calendar}</tt>"
     },
     "cpu": {
-        "format": " {usage}%",
+        "format": "󰻠 {usage}%",
         "interval": 2
     },
-    "memory": {
-        "format": " {percentage}%",
-        "interval": 2
+    "temperature": {
+        "format": " {temperatureC}°C",
+        "critical-threshold": 80,
+        "format-critical": " {temperatureC}°C"
     },
     "battery": {
         "format": "{icon} {capacity}%",
@@ -72,9 +70,9 @@ cat > ~/.config/waybar/config << 'WAYBARCONF'
     },
     "network": {
         "format-wifi": "󰖩 {signalStrength}%",
-        "format-ethernet": "󰈀",
+        "format-ethernet": "󰈀 LAN",
         "format-disconnected": "󰖪",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
+        "tooltip-format-wifi": "{essid}\n{ipaddr}",
         "on-click": "nm-connection-editor"
     },
     "pulseaudio": {
@@ -94,60 +92,94 @@ cat > ~/.config/waybar/style.css << 'WAYBARSTYLE'
 * {
     font-family: "JetBrains Mono Nerd Font", "JetBrains Mono", monospace;
     font-size: 13px;
-    color: #909090;
     min-height: 0;
 }
+
 window#waybar {
-    background: #0a0a0a;
-    border-bottom: 1px solid #1a1a1a;
+    background: rgba(15, 25, 35, 0.95);
+    color: #8899aa;
 }
+
 #custom-logo {
-    font-size: 18px;
+    font-size: 16px;
     color: #51a2da;
-    padding: 0 14px 0 10px;
-}
-#custom-logo:hover {
-    color: #6cb2ea;
-}
-#workspaces {
-    margin-left: 4px;
-}
-#workspaces button {
-    padding: 0 8px;
-    margin: 0 2px;
-    background: transparent;
-    border: none;
-    color: #505050;
-}
-#workspaces button.active {
-    color: #cc6666;
-}
-#workspaces button:hover {
-    color: #808080;
-}
-#window {
-    margin-left: 16px;
-    color: #606060;
-    font-style: italic;
-}
-#clock {
-    font-weight: 600;
-    color: #cc6666;
-}
-#cpu, #memory {
-    color: #606060;
-}
-#battery, #network, #pulseaudio, #cpu, #memory, #tray {
+    background: rgba(81, 162, 218, 0.1);
     padding: 0 12px;
+    margin: 4px 4px 4px 8px;
+    border-radius: 8px;
 }
-#battery.charging { color: #6c8c6c; }
-#battery.warning { color: #cc9966; }
-#battery.critical { color: #cc6666; animation: pulse 1s infinite; }
-@keyframes pulse { 50% { color: #ff6666; } }
-#network.disconnected { color: #404040; }
-#pulseaudio.muted { color: #404040; }
+
+#custom-logo:hover {
+    background: rgba(81, 162, 218, 0.2);
+}
+
+#workspaces {
+    margin: 4px 4px;
+}
+
+#workspaces button {
+    padding: 0 12px;
+    margin: 0 2px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 8px;
+    color: #667788;
+}
+
+#workspaces button.active {
+    background: rgba(81, 162, 218, 0.2);
+    color: #51a2da;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#window {
+    color: #8899aa;
+}
+
+#clock, #battery, #network, #pulseaudio, #cpu, #temperature, #tray {
+    padding: 0 10px;
+    margin: 4px 2px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+#clock {
+    color: #aabbcc;
+    font-weight: 600;
+}
+
+#battery.charging { color: #88cc88; }
+#battery.warning { color: #ccaa66; }
+#battery.critical { 
+    color: #cc6666; 
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    50% { background: rgba(204, 102, 102, 0.3); }
+}
+
+#temperature.critical {
+    color: #cc6666;
+}
+
+#network.disconnected { 
+    color: #556677; 
+}
+
+#pulseaudio.muted { 
+    color: #556677; 
+}
+
 #tray {
     margin-right: 8px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
 }
 WAYBARSTYLE
 
