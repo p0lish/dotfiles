@@ -200,7 +200,7 @@ cat > ~/.config/waybar/config << 'WAYBARCONF'
     "position": "top",
     "height": 34,
     "spacing": 0,
-    "modules-left": ["hyprland/workspaces", "hyprland/window"],
+    "modules-left": ["custom/logo", "hyprland/workspaces", "hyprland/window"],
     "modules-center": ["clock"],
     "modules-right": ["cpu", "memory", "pulseaudio", "network", "battery", "tray"],
     "hyprland/workspaces": {
@@ -265,6 +265,11 @@ cat > ~/.config/waybar/config << 'WAYBARCONF'
     "tray": { 
         "icon-size": 16,
         "spacing": 8 
+    },
+    "custom/logo": {
+        "format": "󰣛",
+        "tooltip": false,
+        "on-click": "wofi --show drun"
     }
 }
 WAYBARCONF
@@ -281,8 +286,16 @@ window#waybar {
     background: #0a0a0a;
     border-bottom: 1px solid #1a1a1a;
 }
+#custom-logo {
+    font-size: 18px;
+    color: #51a2da;
+    padding: 0 14px 0 10px;
+}
+#custom-logo:hover {
+    color: #6cb2ea;
+}
 #workspaces {
-    margin-left: 8px;
+    margin-left: 4px;
 }
 #workspaces button {
     padding: 0 8px;
