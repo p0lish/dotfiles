@@ -18,7 +18,7 @@ echo "=== Installing packages ==="
 sudo dnf install -y hyprland kitty waybar wofi dunst \
     nvidia-dkms libva-nvidia-driver \
     grim slurp wl-clipboard brightnessctl playerctl \
-    polkit-gnome xdg-desktop-portal-hyprland
+    polkit-kde-agent xdg-desktop-portal-hyprland
 
 echo ""
 echo "=== Configuring NVIDIA kernel params ==="
@@ -54,7 +54,7 @@ monitor = ,preferred,auto,1.5
 # === STARTUP ===
 exec-once = waybar
 exec-once = dunst
-exec-once = /usr/libexec/polkit-gnome-authentication-agent-1
+exec-once = /usr/libexec/polkit-kde-authentication-agent-1
 
 # === INPUT ===
 input {
