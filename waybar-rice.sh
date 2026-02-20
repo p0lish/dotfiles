@@ -1,5 +1,5 @@
 #!/bin/bash
-# Waybar rice config - clean pills style
+# Waybar rice - Kian's minimal (dark adapted)
 # curl -fsSL https://raw.githubusercontent.com/p0lish/dotfiles/master/waybar-rice.sh | bash
 
 set -e
@@ -15,75 +15,57 @@ cat > ~/.config/waybar/config << 'WAYBARCONF'
     "layer": "top",
     "position": "top",
     "height": 32,
-    "spacing": 0,
+
     "modules-left": ["custom/logo", "hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["pulseaudio", "network", "cpu", "temperature", "battery", "clock", "tray"],
+    "modules-right": ["pulseaudio", "network", "battery", "tray", "clock"],
+
     "custom/logo": {
         "format": "󰣛",
         "tooltip": false,
         "on-click": "wofi --show drun"
     },
+
     "hyprland/workspaces": {
-        "format": "{icon}",
-        "format-icons": {
-            "1": "󰖟 Web",
-            "2": "󰅩 Code",
-            "3": "󰝚 Music",
-            "4": "󰭹 Chat",
-            "5": "󰉋 Files",
-            "6": "6",
-            "7": "7",
-            "8": "8",
-            "9": "9"
-        },
-        "on-click": "activate",
-        "persistent-workspaces": {
-            "*": 5
-        }
+        "format": "{name}",
+        "on-click": "activate"
     },
+
     "hyprland/window": {
-        "max-length": 50,
-        "separate-outputs": true,
-        "format": "{title}"
+        "max-length": 50
     },
+
+    "tray": {
+        "spacing": 8,
+        "icon-size": 16
+    },
+
     "clock": {
         "format": "{:%H:%M}",
         "format-alt": "{:%a %d %b}",
-        "tooltip-format": "<tt>{calendar}</tt>"
+        "tooltip-format": "{:%Y-%m-%d}"
     },
-    "cpu": {
-        "format": "󰻠 {usage}%",
-        "interval": 2
-    },
-    "temperature": {
-        "format": " {temperatureC}°C",
-        "critical-threshold": 80,
-        "format-critical": " {temperatureC}°C"
-    },
+
     "battery": {
-        "format": "{icon} {capacity}%",
+        "format": "{icon}",
         "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-        "format-charging": "󰂄 {capacity}%",
-        "format-plugged": "󰚥 {capacity}%",
-        "states": { "warning": 20, "critical": 10 }
+        "format-charging": "󰂄",
+        "tooltip-format": "{capacity}%"
     },
+
     "network": {
-        "format-wifi": "󰖩 {signalStrength}%",
-        "format-ethernet": "󰈀 LAN",
+        "format-wifi": "󰖩",
+        "format-ethernet": "󰈀",
         "format-disconnected": "󰖪",
-        "tooltip-format-wifi": "{essid}\n{ipaddr}",
-        "on-click": "nm-connection-editor"
+        "tooltip-format-wifi": "{essid} {signalStrength}%"
     },
+
     "pulseaudio": {
-        "format": "{icon} {volume}%",
+        "format": "{icon}",
         "format-muted": "󰝟",
-        "format-icons": { "default": ["󰕿", "󰖀", "󰕾"] },
+        "format-icons": {"default": ["󰕿", "󰖀", "󰕾"]},
+        "tooltip-format": "{volume}%",
         "on-click": "pavucontrol"
-    },
-    "tray": { 
-        "icon-size": 16,
-        "spacing": 8 
     }
 }
 WAYBARCONF
@@ -92,98 +74,81 @@ cat > ~/.config/waybar/style.css << 'WAYBARSTYLE'
 * {
     font-family: "JetBrains Mono Nerd Font", "JetBrains Mono", monospace;
     font-size: 13px;
+    border: none;
+    border-radius: 0;
     min-height: 0;
 }
 
 window#waybar {
-    background: rgba(15, 25, 35, 0.95);
-    color: #8899aa;
+    background: #0d0d0d;
+    color: #888888;
 }
 
 #custom-logo {
-    font-size: 16px;
     color: #51a2da;
-    background: rgba(81, 162, 218, 0.1);
-    padding: 0 12px;
-    margin: 4px 4px 4px 8px;
-    border-radius: 8px;
+    padding: 0 14px 0 10px;
+    font-size: 15px;
 }
 
 #custom-logo:hover {
-    background: rgba(81, 162, 218, 0.2);
-}
-
-#workspaces {
-    margin: 4px 4px;
+    color: #7ac2fa;
 }
 
 #workspaces button {
-    padding: 0 12px;
-    margin: 0 2px;
-    background: rgba(255, 255, 255, 0.05);
-    border: none;
-    border-radius: 8px;
-    color: #667788;
+    padding: 0 10px;
+    color: #555555;
+    border-bottom: 2px solid transparent;
 }
 
 #workspaces button.active {
-    background: rgba(81, 162, 218, 0.2);
-    color: #51a2da;
+    color: #cccccc;
+    border-bottom: 2px solid #cc6666;
 }
 
 #workspaces button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    color: #888888;
 }
 
 #window {
-    color: #8899aa;
-}
-
-#clock, #battery, #network, #pulseaudio, #cpu, #temperature, #tray {
-    padding: 0 10px;
-    margin: 4px 2px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    color: #666666;
 }
 
 #clock {
-    color: #aabbcc;
-    font-weight: 600;
+    color: #cccccc;
+    padding: 0 14px;
 }
 
-#battery.charging { color: #88cc88; }
-#battery.warning { color: #ccaa66; }
-#battery.critical { 
-    color: #cc6666; 
-    animation: pulse 1s infinite;
+#battery, #network, #pulseaudio {
+    padding: 0 10px;
+    color: #888888;
 }
 
-@keyframes pulse {
-    50% { background: rgba(204, 102, 102, 0.3); }
+#battery.charging {
+    color: #88aa88;
 }
 
-#temperature.critical {
+#battery.warning {
+    color: #ccaa66;
+}
+
+#battery.critical {
     color: #cc6666;
 }
 
-#network.disconnected { 
-    color: #556677; 
+#network.disconnected {
+    color: #444444;
 }
 
-#pulseaudio.muted { 
-    color: #556677; 
+#pulseaudio.muted {
+    color: #444444;
 }
 
 #tray {
-    margin-right: 8px;
-}
-
-#tray > .passive {
-    -gtk-icon-effect: dim;
+    padding: 0 8px;
 }
 WAYBARSTYLE
 
-echo "✓ Waybar config written to ~/.config/waybar/"
+echo "✓ Waybar config written"
 echo ""
-echo "Reload with: killall waybar; waybar &"
+echo "Reload: killall waybar; waybar &"
 echo ""
