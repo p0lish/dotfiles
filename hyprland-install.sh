@@ -170,9 +170,9 @@ bind = , XF86AudioNext, exec, playerctl next
 bind = , XF86AudioPrev, exec, playerctl previous
 
 # === WINDOW RULES ===
-windowrule = float, class:^(pavucontrol)$
-windowrule = float, class:^(nm-connection-editor)$
-windowrule = float, title:^(Picture-in-Picture)$
+windowrule = float, match:class ^(pavucontrol)$
+windowrule = float, match:class ^(nm-connection-editor)$
+windowrule = float, match:title ^(Picture-in-Picture)$
 HYPRCONF
 
 # === WAYBAR CONFIG ===
