@@ -4,21 +4,20 @@ Personal config files.
 
 ## Hyprland (Fedora + NVIDIA)
 
-One-liner install:
-
+### Full install
 ```bash
 curl -fsSL https://raw.githubusercontent.com/p0lish/dotfiles/master/hyprland-install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/p0lish/dotfiles/master/hyprland-rice.sh | bash
+curl -fsSL https://raw.githubusercontent.com/p0lish/dotfiles/master/waybar-rice.sh | bash
 ```
 
-Includes:
-- Hyprland with NVIDIA env vars
-- Waybar (minimal dark theme)
-- Wofi launcher
-- Kitty terminal
-- Screenshot tools (grim + slurp)
-- Media keys & brightness
+### Individual scripts
 
-After install, reboot and select Hyprland from login screen.
+| Script | What it does |
+|--------|--------------|
+| `hyprland-install.sh` | Packages, COPR, fonts, NVIDIA setup |
+| `hyprland-rice.sh` | Hyprland appearance & keybindings |
+| `waybar-rice.sh` | Waybar config & styling |
 
 ### Keybindings
 
@@ -35,8 +34,6 @@ After install, reboot and select Hyprland from login screen.
 | `Super + M` | Exit Hyprland |
 | `Print` | Screenshot (select area) |
 | `Shift + Print` | Screenshot (full) |
-
-Config: `~/.config/hypr/hyprland.conf`
 
 ## Neovim
 
