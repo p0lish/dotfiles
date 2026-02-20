@@ -7,7 +7,7 @@ Personal config files.
 One-liner install:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/p0lish/dotfiles/main/hyprland-install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/p0lish/dotfiles/master/hyprland-install.sh | bash
 ```
 
 Includes:
