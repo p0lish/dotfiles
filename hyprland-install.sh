@@ -22,6 +22,15 @@ sudo dnf install -y --skip-unavailable hyprland kitty waybar wofi dunst \
     hyprpolkitagent xdg-desktop-portal-hyprland
 
 echo ""
+echo "=== Installing JetBrains Mono Nerd Font ==="
+mkdir -p ~/.local/share/fonts
+cd /tmp
+curl -fLO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz
+tar -xf JetBrainsMono.tar.xz -C ~/.local/share/fonts
+fc-cache -fv
+rm -f JetBrainsMono.tar.xz
+
+echo ""
 echo "=== Configuring NVIDIA kernel params ==="
 if ! grep -q "nvidia-drm.modeset=1" /etc/default/grub; then
     sudo sed -i 's/GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="nvidia-drm.modeset=1 /' /etc/default/grub
